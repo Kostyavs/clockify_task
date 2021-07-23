@@ -12,6 +12,7 @@ headers = {'X-Api-Key': api_key}
 
 
 def get_workspace_id():
+    '''Returns workspace id'''
     url = api_url + '/workspaces'
     res = requests.get(url, headers=headers)
     res = res.json()
@@ -19,6 +20,7 @@ def get_workspace_id():
 
 
 def get_project_id(workspace_id, project_name):
+    '''Takes workspace id, project name and returns project id'''
     url = api_url + '/workspaces/' + workspace_id + '/projects'
     res = requests.get(url, headers=headers)
     res = res.json()
@@ -32,6 +34,7 @@ def get_project_id(workspace_id, project_name):
 
 
 def get_all_tasks(workspace_id, project_id):
+    '''Returns all tasks'''
     url = api_url + '/workspaces/' + workspace_id + '/projects/' + project_id + '/tasks'
     res = requests.get(url, headers=headers)
     res = res.json()
@@ -40,6 +43,7 @@ def get_all_tasks(workspace_id, project_id):
 
 if __name__=='__main__':
     workspace_id = get_workspace_id()
+    project_name = input('Type your projects name: ')
     project_id = get_project_id(workspace_id, 'Daily CLI reporter')
     tasks = get_all_tasks(workspace_id, project_id)
     print(tasks)
